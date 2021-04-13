@@ -17,8 +17,8 @@
 				<h1>{{ post.title }}</h1>
 				<div class="single-author">
 					<img class="profile-picture"
-					{% if post.user.profile_picture %}
-					src="{{ post.user.profile_picture.url }}"
+					{% if post.author.profile_picture %}
+					src="{{ post.author.profile_picture.url }}"
 					{% else %}
 					src="{% static 'images/no-profile-picture.png' %}"
 					{% endif %}
