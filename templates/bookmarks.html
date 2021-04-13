@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}বুকমার্কস - লিপিকরণ{% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock header %}
+
+{% block content %}
+{% include 'sidebar-left.html' %}
+
+<h1 class="heading">বুকমার্কস</h1>
+
+{% if messages %}
+<div class="messages">
+	{% for message in messages %}
+	<div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+	{% endfor %}
+</div>
+{% endif %}
+
+{% for p in post %}
+{% include 'partials/_post.html' %}
+{% empty %}
+<div class="body"><i>কোনও লিপি বুকমার্কে নেই!</i></div>
+{% endfor %}
+
+{% include 'pagination.html' %}
+
+{% include 'sidebar-right.html' %}
+{% endblock content %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock footer %}

@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load blog_tags %}
+{% load static %}
+{% block title %}{{ post.title }} | লিপি{% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+<!-- Main Body -->
+<section class="single-header">
+	<div class="single-header-table">
+		<div class="single-header-content">
+			<img class="single-thumbnail" src="{{ post.thumbnail.url }}" alt="Thumbnail" />
+			<div class="single-info">
+				<h1>{{ post.title }}</h1>
+				<div class="single-author">
+					<img class="profile-picture" src="{{ post.author.profile_picture.url }}" alt="Profile Picture" />
+					<div class="single-author-info">
+						<a href="{% url 'author' post.author.username %}">
+							<h2>{{ post.author.get_full_name }} <img class="verification-badge" src="{% static 'icons/icon-outline/check-circle.svg' %}"></h2>
+						</a>
+						<span class="badge">লিপিকার</span>
+					</div>
+				</div>
+				<ul class="single-counts">
+					<li><img class="icon-white" src="{% static 'icons/icon-outline/fire.svg' %}"> {{ post.category.name }}</li>
+					<li><img class="icon-white" src="{% static 'icons/icon-outline/calendar.svg' %}"> {{ post.posted_on|date:"M d, Y" }}</li>
+					<li><img class="icon-white" src="{% static 'icons/icon-outline/eye.svg' %}"> {{ post.views }}</li>
+
+					<li>
+					{% if post in request.user.like_post.all %}
+					<img id="totalLikeIcon" class="icon-white" src="{% static 'icons/icon-outline/heart-solid.svg' %}">
+					{% else %}
+					<img id="totalLikeIcon" class="icon-white" src="{% static 'icons/icon-outline/heart.svg' %}">
+					{% endif %}
+					<span id="totalLike">{{ post.likes.count }}</span>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="single-main-body">
+	<section class="single-body">
+		<div class="body single-main-post">
+			{{ post.body|safe }}
+		</div>
+
+		{% if messages %}
+		<div class="messages">
+			{% for message in messages %}
+			<div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+			{% endfor %}
+		</div>
+		{% endif %}
+
+		<div class="body single-actions">
+			<a name="{{ post.id }}" class="like-button" id="likeBtn" style="cursor:pointer">
+			{% if liked %}
+			<img id="likeIcon" class="icon-white" src="{% static 'icons/icon-outline/heart-solid.svg' %}"> <span id="likeText">আনলাইক</span>
+			{% else %}
+			<img id="likeIcon" class="icon-white"
+				src="{% static 'icons/icon-outline/heart.svg' %}"> <span id="likeText">লাইক</span>
+			{% endif %}
+			</a>
+			<div class="share">
+				<input type="text" value="{{ request.build_absolute_uri }}" id="share-link" hidden>
+				<button class="share-button" onclick="copylink()" onmouseout="outFunc()">
+					<span class="tooltiptext" id="share-tooltip">Copy to clipboard</span>
+					<img class="icon" src="{% static 'icons/icon-outline/link.svg' %}"> শেয়ার
+				</button>
+			</div>
+
+			{% if request.user == post.author or request.user.is_superuser %}
+			<a class="edit-button" href="{% url 'update' post.id %}"><img class="icon-white" src="{% static 'icons/icon-outline/edit.svg' %}">
+			সম্পাদন</a>
+			{% else %}
+			<a class="report-button" href="{% url 'report' post.id %}"><img class="icon-white" src="{% static 'icons/icon-outline/alert.svg' %}">
+				রিপোর্ট</a>
+			{% endif %}
+
+		</div>
+		<h2 class="heading">সাম্প্রতিক মন্তব্য</h2>
+		{% for comment in comment %}
+		<div class="body comment">
+			<img class="profile-picture"
+			{% if comment.user.profile_picture %}
+			src="{{ comment.user.profile_picture.url }}"
+			{% else %}
+			src="{% static 'images/no-profile-picture.png' %}"
+			{% endif %}
+			alt="Profile Picture" />
+			<div class="comment-info">
+				<a href="{% url 'author' comment.user %}"><strong>{{ comment.user.get_full_name }}</strong></a>
+				<small class="date">{{ comment.posted_on }}</small>
+				<p>{{ comment.post_comment }}</p>
+				{% comment %} <div class="comment-reply-btn"><a class="comment-reply-link" href="#">রিপ্লাই</a></div> {% endcomment %}
+			</div>
+		</div>
+		{% empty %}
+		<div class="body"><i>কোনও মন্তব্য নেই!</i></div>
+		{% endfor %}
+		<section class="body comment-area">
+			<h3>মন্তব্য লিখুন</h3>
+			{% if request.user.is_authenticated %}
+				<form action="" method="POST">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button type="submit">সাবমিট করুন</button>
+				</form>
+			{% else %}
+				<p>মন্তব্য করার জন্য লগইন করুন!</p>
+			{% endif %}
+		</section>
+	</section>
+	<section class="single-sidebar">
+		<!-- Widget Area -->
+		<!-- Explore Widget-->
+		<div class="explore-widget">
+			<h2 class="heading">এক্সপ্লোর</h2>
+			<div class="body">
+				<div class="explore-widget-row">
+					<div class="explore-widget-col">
+						<a href="{% url 'coming-soon' %}"><img class="explore-widget-icon" src="{% static 'images/skill.png' %}" /><h5>লিপিশিখন</h5></a>
+						<a href="{% url 'memes' %}"><img class="explore-widget-icon" src="{% static 'images/meme.png' %}" /><h5>লিপিমীম</h5></a>
+					</div>
+					<div class="explore-widget-col">
+						<a href="{% url 'coming-soon' %}"><img class="explore-widget-icon" src="{% static 'images/store.png' %}" /><h5>লিপিস্টোর</h5></a>
+						<a href="{% url 'coming-soon' %}"><img class="explore-widget-icon" src="{% static 'images/career.png' %}" /><h5>ক্যারিয়ার্স</h5></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Top Author Widget -->
+		<div class="top-author-widget">
+			<h2 class="heading">সেরা লিপিকার</h2>
+			<div class="body">
+				{% best_lipikar 5 %}
+			</div>
+		</div>
+	</section>
+</section>
+
+
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}
+
+{% block ajax %}
+<script>
+	// Like Ajax Call
+	$('#likeBtn').click(function() {
+		$.ajax({
+			type	: "POST",
+			url 	: "{% url 'postlike' %}",
+			data 	: {'post_id': $(this).attr('name'), 'operation': 'like', 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+			dataType: "json",
+			success	: function(res) {
+				likeText = document.getElementById('likeText')
+				likeIcon = document.getElementById('likeIcon')
+				totalLikeIcon = document.getElementById('totalLikeIcon')
+				document.getElementById('totalLike').innerText = res.total_like
+				if (res.liked == true) {
+					likeText.innerText = " আনলাইক";
+					likeIcon.src = "{% static 'icons/icon-outline/heart-solid.svg' %}"
+					totalLikeIcon.src = likeIcon.src
+
+				}
+				else if (res.liked == false) {
+					likeText.innerText = " লাইক"
+					likeIcon.src = "{% static 'icons/icon-outline/heart.svg' %}"
+					totalLikeIcon.src = likeIcon.src
+
+				}
+
+			}
+		})
+	})
+</script>
+{% endblock ajax %}

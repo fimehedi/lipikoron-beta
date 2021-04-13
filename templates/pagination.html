@@ -1,0 +1,23 @@
+{% if post.has_other_pages %}
+<div class="pagination hide-on-mobile">
+    {% if post.has_previous %}
+        <a href="?page={{ post.previous_page_number }}">&laquo;</a>
+    {% else %}
+        <a>&laquo;</a>
+    {% endif %}
+
+    {% for i in post.paginator.page_range %}
+      {% if post.number == i %}
+        <a class="active">{{ i }}</a>
+      {% else %}
+        <a href="?page={{ i }}">{{ i }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {% if post.has_next %}
+        <a href="?page={{ post.next_page_number }}">&raquo;</a>
+    {% else %}
+        <a>&raquo;</a>
+    {% endif %}
+</div>
+{% endif %}

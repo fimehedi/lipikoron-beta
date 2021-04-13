@@ -1,0 +1,39 @@
+{% load static %}
+<!-- Main Body -->
+<section class="main-body">
+    <!-- Left Sidebar -->
+    <section class="left-sidebar hide-on-mobile">
+    <!-- Left Navigation -->
+        <div class="tabs">
+            <li class="tab-item">
+                <a class="tab-button first-child" href="{% url 'index' %}"><img class="icon-white" src="{% static 'icons/left-nav/home.svg' %}"><span>লিপিফিড</span></a>
+            </li>
+            <li class="tab-item" id='dashboard'>
+                <a href="#dashboard" class="tab-button"><img class="icon-white" src="{% static 'icons/left-nav/edit.svg' %}"><span>ড্যাশবোর্ড</span></a>
+                <div class="smenu">
+                    <a href="{% url 'dashboard' %}">সকল লিপি</a>
+                    <a href="{% url 'create' %}">নতুন লিপি</a>
+                </div>
+            </li>
+            <li class="tab-item">
+                <a class="tab-button" href="{% url 'notification' %}"><img class="icon-white" src="{% static 'icons/left-nav/bell.svg' %}"><span>নোটিফিকেশন</span></a>
+            </li>
+            <li class="tab-item">
+                <a class="tab-button" href="{% url 'leaderboard' %}"><img class="icon-white" src="{% static 'icons/left-nav/hash.svg' %}"><span>লিডারবোর্ড</span></a>
+            </li>
+            <li class="tab-item">
+                <a class="tab-button" href="{% url 'bookmark' %}"><img class="icon-white" src="{% static 'icons/left-nav/bookmarks.svg' %}"><span>বুকমার্কস</span></a>
+            </li>
+            <li class="tab-item" id="reward">
+                <a href="#reward" class="tab-button"><img class="icon-white" src="{% static 'icons/left-nav/gift.svg' %}"><span>রিওয়ার্ড</span></a>
+                <div class="smenu">
+                    <a href="{% url 'balance' %}">ব্যালেন্স</a>
+                    <a href="{% url 'withdraw' %}">উইথড্র করুন</a>
+                </div>
+            </li>
+            <li class="tab-item">
+                <a class="tab-button last-child" href="{% url 'activity' %}"><img class="icon-white" src="{% static 'icons/left-nav/megaphone.svg' %}"><span>অ্যাক্টিভিটি</span></a>
+            </li>
+        </div>
+    </section>
+    <section class="middle-area">

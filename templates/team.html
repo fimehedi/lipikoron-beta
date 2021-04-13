@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}আমাদের টিম - লিপিকরণ{% endblock %}
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+{% block content %}
+<div class="teampage">
+    {% for profile in profile %}
+    <div class="profile">
+        <img src="{{ profile.picture.url }}">
+        <h2>{{ profile.name }}</h2>
+        <b>{{ profile.role }}</b>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

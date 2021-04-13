@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ author.name.get_full_name }} - লিপিকার{% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+{% include 'sidebar-left.html' %}
+<h1 class="heading hide-on-mobile">লিপিকার প্রোফাইল</h1>
+	<div class="body author-page">
+		<img class="profile-picture"
+        {% if author.profile_picture %}
+        src="{{ author.profile_picture.url }}"
+        {% else %}
+        src="{% static 'images/no-profile-picture.png' %}"
+        {% endif %}
+        alt="Profile Picture" />
+        <h1>
+            {{ author.get_full_name }}
+            {% if author.verified %}
+            <img class="verification-badge" src="{% static 'icons/icon-outline/check-circle.svg' %}">
+            {% endif %}
+        </h1>
+		<small>@{{ author.username }}</small>
+		<ul class="author-counts">
+			<li class="badge-transparent"><img class="icon" src="{% static 'icons/icon-outline/file-text.svg' %}"> {{ author.articles }}</li>
+			<li class="badge-transparent"><img class="icon" src="{% static 'icons/icon-outline/heart.svg' %}"> {{ author.likes }}</li>
+			<li class="badge-transparent"><img class="icon" src="{% static 'icons/icon-outline/eye.svg' %}"> {{ author.views }}</li>
+		</ul>
+		<p>{{ author.details }}</p>
+		{% if request.user.id == author.id %}
+        <a href="{% url 'settings' %}"><button>সম্পাদন করুন</button></a>
+        {% endif %}
+	</div>
+	<h1 class="heading">{{ author.get_full_name }} এর লিপি সমূহ</h1>
+
+{% for p in post %}
+    {% include 'partials/_post.html' %}
+{% empty %}
+<div class="body"><i>কোনও লিপি নেই!</i></div>
+{% endfor %}
+
+{% include 'pagination.html' %}
+
+{% include 'sidebar-right.html' %}
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

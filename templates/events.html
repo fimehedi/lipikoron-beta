@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}ইভেন্টস - লিপিকরণ{% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+{% include 'sidebar-left.html' %}
+
+<h1 class="heading">লিপিকরণ ইভেন্টস</h1>
+<div class="body">
+    {% for event in event %}
+    <div class="card">
+        <img src="{{ event.poster.url }}">
+        <div class="container">
+          <a href="{{ event.url }}" target="_blank"><b>{{ event.title }}</b></a><br />
+          <small>{{ event.date }}</small> 
+        </div>
+    </div>
+    {% empty %}
+		<i>কোনও ইভেন্ট নেই!</i>
+    {% endfor %}
+</div>
+
+
+{% include 'sidebar-right.html' %}
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

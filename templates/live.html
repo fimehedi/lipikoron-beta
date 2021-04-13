@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}লাইভ - লিপিকরণ{% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+{% include 'sidebar-left.html' %}
+
+<h1 class="heading">লিপিকরণ লাইভ</h1>
+<div class="body">
+    {% for live in live %}
+    <div class="card">
+        <img src="{{ live.thumbnail.url }}">
+        <div class="container">
+          <a href="{{ live.url }}" target="_blank"><b>{{ live.title }}</b></a><br />
+          <small>{{ live.date }}</small> 
+        </div>
+    </div>
+    {% empty %}
+		<i>কোনও লাইভ নেই!</i>
+    {% endfor %}
+</div>
+
+
+{% include 'sidebar-right.html' %}
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

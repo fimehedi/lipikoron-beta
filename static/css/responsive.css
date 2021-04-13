@@ -1,0 +1,260 @@
+/* For mobile devices */
+@media (max-width:768px){
+	/* Hides Content */
+	.hide-on-mobile{
+		display:none;
+	}
+	/* Modify Styles */
+	body{
+		margin-top:50px;
+		font-size:15px;
+		user-select: none;
+	}
+	input{
+		font-size:15px !important;
+	}
+	textarea, button{
+		font-size:15px;
+	}
+	.heading{
+		line-height:27px;
+		margin-bottom:0;
+		background-color:#fff;
+		border-bottom:1px solid #f9f9f9;
+		font-size:15px;
+	}
+	.card{
+		width:100%;
+		margin:10px 0;
+	}
+	.mobile-nav{
+		display:flex;
+	}
+	.create-button{
+		bottom:60px;
+		right:10px;
+	}
+	/* Preloader Animation */
+	.loader-container .logo{
+		height:50px !important;
+		width:200px !important;
+	}
+	/* Header */
+	.header-row{
+		height:50px;
+	}
+	.logo{
+		height:34px !important;
+		width:130px !important;
+	}
+	.header-logo{
+		width:100%;
+		text-align:center;
+	}
+	.header-row .header-buttons{
+		margin-left:auto;
+	}
+	/* Mobile Menu */
+	.mobile-menu-toggle{
+		display:block;
+	}
+	.mobile-menu-active{
+		display:block;
+	}
+	/* User Menu */
+	.user-menu{
+		padding:0;
+		border:none;
+	}
+	.user-menu .profile-picture{
+		height:25px;
+		width:25px;
+		margin:0;
+		padding:2px;
+		border:2px solid #1aa260;
+	}
+	.mobile-login-icon{
+		display:block;
+	}
+	/* Hero */
+	.hero{
+		display:table;
+	}
+	.scroll-button{
+		display:block;
+	}
+	/* Main Body */
+	.main-body{
+		margin:53px 0px;
+	}
+	/* Archive Post */
+	.archive-post{
+		padding:0;
+	}
+	.archive-body{
+		display:block;
+	}
+	.archive-thumbnail{
+		width:100%;
+		height:200px;
+	}
+	.archive-category-button{
+		display:block;
+	}
+	.archive-info{
+		width:100%;
+		margin-left:0;
+	}
+	.archive-info h1{
+		padding:0 23px;
+		font-size:18px;
+	}
+	.archive-info .mobile-excerpt{
+		display: block;
+	}
+	.archive-actions{
+		padding:10px 23px;
+		background-color:#f5f5f5;
+	}
+	.archive-actions span{
+		display:none;
+	}
+	/* Single Post */
+	.single-header-content{
+		display:block;
+		padding-top:50px;
+		padding-bottom:15px;
+	}
+	.single-thumbnail{
+		width:100%;
+	}
+	.single-info{
+		width:100%;
+		margin-left:0;
+	}
+	.single-info h1{
+		font-size:25px;
+	}
+	.single-author .profile-picture{
+		height:50px;
+		width:50px;
+	}
+	.single-author-info h2{
+		font-size:17px;
+	}
+	.single-counts{
+		justify-content:space-between;
+	}
+	.single-sidebar{
+		display:none;
+	}
+	.single-main-body{
+		padding:5px 0px 55px 5px;
+	}
+	.single-body{
+		width:100%;
+		margin-right:5px;
+	}
+	.single-main-post{
+		padding:1px 23px;
+	}
+	.single-actions{
+		margin-bottom:5px;
+	}
+	.comment .profile-picture{
+		height:40px;
+		width:40px;
+	}
+	.comment p{
+		margin-left:-50px;
+	}
+	.comment-area{
+		margin-top:5px;
+	}
+	.comment-area textarea, .report-page textarea, .lipikar-form textarea{
+		width:90%;
+	}
+	/* Author Page */
+	.author-page h1{
+		font-size:17px;
+	}
+	.author-counts{
+		font-size:14px;
+	}
+	/* 404 Page */
+	.not-found h3{
+		font-size:30px;
+	}
+	/* Login Page */
+	.login{
+		width:350px;
+		overflow:auto hidden;
+	}
+	/* Dashboard */
+	.dashboard-nav-panel{
+		padding:10px;
+	}
+	.dashboard-navigation .icon{
+		display:none;
+	}
+	.dashboard-post-list tr:nth-child(odd){
+		background-color:#fff;
+	}
+	.dashboard-post-list tr:hover{
+		background-color:#fff;
+	}
+	.dashboard-post-list td{
+		padding:10px 10px;
+	}
+	.dashboard-post-title-col{
+		width:65%;
+	}
+	.dashboard-post-conditions-col{
+		display:none;
+	}
+	.dashboard-post-actions-col{
+		width:35%;
+	}
+	/* New Post */
+	.create input[type=text]{
+		width:85%;
+	}
+	.create #cke_id_body{
+		width:275px !important;
+	}
+	/* Reaward */
+	.balance{
+		font-size:25px;
+		height:125px;
+		width:125px;
+	}
+	/* Settings */
+	.settings input{
+		width:75%;
+	}
+	.about-field{
+		width:85%;
+	}
+	/* Activity */
+	.action-button-set{
+		display:flex;
+	}
+	.mobile-copyright{
+		display:block;
+	}
+	/* Team Page */
+	.teampage{
+		padding-top:0;
+		margin-bottom:25px;
+	}
+	.profile h2{
+		font-size:17px;
+	}
+	.profile b{
+		font-size:15px;
+	}
+	/* Meme */
+	.meme img{
+		width:100%;
+	}
+}

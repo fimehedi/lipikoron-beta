@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="en-US">
+
+<head>
+	<!-- Meta Tags -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Linkings -->
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'css/main.css' %}">
+	<link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+	<link rel="stylesheet" href="{% static 'css/lity.min.css' %}">
+	<link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}" />
+	<title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+	<!-- Header -->
+	{% block header %}
+
+	{% endblock %}
+
+	<!-- Content -->
+	{% block content %}
+
+	{% endblock %}
+
+	<!-- Footer -->
+	{% block footer %}
+
+	{% endblock %}
+
+	<!-- JavaScripts here -->
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/superplaceholder.js' %}"></script>
+	<script src="{% static 'js/lity.min.js' %}"></script>
+	<script src="{% static 'js/prettify.min.js' %}"></script>
+	<script src="{% static 'js/topbar.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+
+	{% block ajax %}
+		<script>
+			// Bookmark Ajax call
+			$('.bookmark').click(function(){
+				$.ajax({
+					type    : "POST",
+					url     : "{% url 'bookmark' %}",
+					data    : {'post_id': $(this).attr('name'), 'operation': 'bookmark', 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+					dataType: 'json',
+					success : function(res) {
+						bookmarkIcon = document.getElementById('post'+res.post_id)
+						if (res.is_bookmark == true) {
+							bookmarkIcon.src = "{% static 'icons/icon-outline/bookmark-solid.svg' %}"
+						}
+						else if (res.is_bookmark == false) {
+							bookmarkIcon.src = "{% static 'icons/icon-outline/bookmark.svg' %}"
+						}
+					}
+				})
+			})
+
+			$('.likeBtn').click(function() {
+				$.ajax({
+					type 	: "POST",
+					url 	: "{% url 'postlike' %}",
+					data 	: {"post_id": $(this).attr('name'), 'operation': 'like', 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+					dataType: 'json',
+					success : function(res) {
+						console.log('yes')
+						likeIcon = document.getElementById('post'+res.post_id+'LikeIcon')
+						document.getElementById('post'+res.post_id+'TotalLike').innerText = res.total_like
+						if (res.liked == true) {
+							likeIcon.src = "{% static 'icons/icon-outline/heart-solid.svg' %}"
+
+						}
+						else if (res.liked == false) {
+							likeIcon.src = "{% static 'icons/icon-outline/heart.svg' %}"
+						}
+
+					}
+				})
+			})
+
+		</script>
+	{% endblock ajax %}
+</body>
+
+</html>

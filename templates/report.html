@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}রিপোর্ট - লিপিকরণ{% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock header %}
+
+{% block content %}
+{% include 'sidebar-left.html' %}
+<h1 class="heading">রিপোর্ট</h1>
+<section class="body report-page">
+    <form action="{% url 'report' post_id %}" method="POST">
+        {% csrf_token %}
+            <label for="report-post-url">Post ID:</label>
+            <input type="text" name="" id="report-post-url" value="{{ post_id }}">
+        {{ form.as_p }}
+        <div class="btn-set">
+            <button type="submit">সাবমিট করুন</button>
+        </div>
+    </form>
+</section>
+
+{% include 'sidebar-right.html' %}
+{% endblock content %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock footer %}

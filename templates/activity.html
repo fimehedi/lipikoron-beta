@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}অ্যাক্টিভিটি - লিপিকরণ{% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+{% include 'sidebar-left.html' %}
+	<h1 class="heading">অ্যাক্টিভিটি</h1>
+	<div class="infinity-quote">
+		<h4>গুণীজন বলেন</h4>
+		<div class="slide showing">
+			<h2>“Quotation”</h2>
+			<h3>- Author name</h3>
+		</div>
+		{% for quote in quote %}
+		<div class="slide">
+			<h2>“{{ quote.quotation }}”</h2>
+			<h3>- {{ quote.author }}</h3>
+		</div>
+		{% endfor %}
+	</div>
+	<div class="body action-button-set">
+		<a href="#"><button class="btn-active"><img class="icon-white" src="{% static 'icons/icon-outline/edit.svg' %}"> লিপিকার হোন</button></a>
+		<a href="reward.php"><button class="btn-active"><img class="icon-white" src="{% static 'icons/icon-outline/gift.svg' %}"> রিওয়ার্ড</button></a>
+		<a href="{% url 'leaderboard' %}"><button class="btn-active"><img class="icon-white" src="{% static 'icons/icon-outline/leaderboard.svg' %}"> লিডারবোর্ড</button></a>
+	</div>
+	<div class="body">
+		<ul class="quick-links">
+			<li><a href="#">নীতিমালা শর্তাবলী<img class="icon" src="{% static 'icons/icon-outline/chevron-right.svg' %}"></a></li>
+			<li><a href="#">কপিরাইট ইস্যু<img class="icon" src="{% static 'icons/icon-outline/chevron-right.svg' %}"></a></li>
+			<li><a href="#">প্রশ্নোত্তর<img class="icon" src="{% static 'icons/icon-outline/chevron-right.svg' %}"></a></li>
+			<li><a href="#">রিপোর্ট করুন<img class="icon" src="{% static 'icons/icon-outline/chevron-right.svg' %}"></a></li>
+			<li><a href="{% url 'team' %}">আমাদের টিম<img class="icon" src="{% static 'icons/icon-outline/chevron-right.svg' %}"></a></li>
+		</ul>
+	</div>
+	<p class="mobile-copyright">কপিরাইট © ২০২০ <a href="{% url 'index' %}">লিপিকরণ</a> । সর্বস্বত্ব সংরক্ষিত</p>
+
+{% include 'sidebar-right.html' %}
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

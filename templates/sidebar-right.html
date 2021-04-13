@@ -1,0 +1,31 @@
+{% load blog_tags %}
+{% load static %}
+</section>
+<!-- Right Sidebar -->
+<section class="right-sidebar hide-on-mobile">
+<!-- Widget Area -->
+    <!-- Explore Widget-->
+    <div class="explore-widget">
+        <h2 class="heading">এক্সপ্লোর</h2>
+        <div class="body">
+            <div class="explore-widget-row">
+                <div class="explore-widget-col">
+                    <a href="{% url 'coming-soon' %}"><img class="explore-widget-icon" src="{% static 'images/skill.png' %}" /><h5>লিপিশিখন</h5></a>
+                    <a href="{% url 'memes' %}"><img class="explore-widget-icon" src="{% static 'images/meme.png' %}" /><h5>লিপিমীম</h5></a>
+                </div>
+                <div class="explore-widget-col">
+                    <a href="{% url 'coming-soon' %}"><img class="explore-widget-icon" src="{% static 'images/store.png' %}" /><h5>লিপিস্টোর</h5></a>
+                    <a href="{% url 'coming-soon' %}"><img class="explore-widget-icon" src="{% static 'images/career.png' %}" /><h5>ক্যারিয়ার্স</h5></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Top Author Widget -->
+    <div class="top-author-widget">
+        <h2 class="heading">সেরা লিপিকার</h2>
+        <div class="body">
+            {% best_lipikar 5 %}
+        </div>
+    </div>
+</section>
+</section>

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} ব্যলেন্স {% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+{% include 'sidebar-left.html' %}
+
+
+<h1 class="heading">রিওয়ার্ড</h1>
+
+	<div class="body reward">
+		<span class="balance">৳{{ request.user.balance }}</span>
+		<p>আপনার ব্যালেন্স ১০০ টাকা হলে আপনি উইথড্র করতে পারবেন।</p>
+		<a href="#">পেমেন্ট পলিসি দেখুন</a>
+	</div>
+
+
+{% include 'sidebar-right.html' %}
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}সেটিংস - লিপিকরণ{% endblock title %}
+
+{% block header %}
+	{% include 'header.html' %}
+{% endblock header %}
+
+{% block content %}
+{% include 'sidebar-left.html' %}
+	<h1 class="heading">সেটিংস</h1>
+
+	{% if messages %}
+	<div class="messages">
+		{% for message in messages %}
+		<div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+		{% endfor %}
+	</div>
+	{% endif %}
+
+	<div class="body settings">
+		<form action="{% url 'settings' %}" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_p }}
+
+			<div class="btn-set">
+				<a href="#"><button class="btn-active">আপডেট করুন</button></a>
+			</div>
+		</form>
+		<div class="btn-set">
+			<a href="{% url 'password_change' %}"><button>পাসওয়ার্ড পরিবর্তন</button></a>
+			<a href="{% url 'account_delete' %}"><button>অ্যাকাউন্ট ডিলিট</button></a>
+		</div>
+	</div>
+{% include 'sidebar-right.html' %}
+{% endblock content %}
+
+{% block footer %}
+	{% include 'footer.html' %}
+{% endblock footer %}

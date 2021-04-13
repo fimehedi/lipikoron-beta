@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}লগ ইন - লিপিকরণ{% endblock %}
+
+{% block content %}
+<body style="background-color:#fff;">
+	<div class="login">
+		<div class="login-heading">
+			<h4>লগ-ইন করুন</h4>
+			<img src="{% static 'images/auth.png' %}" alt="Login" />
+		</div>
+		{% if messages %}
+		<div class="messages">
+			{% for message in messages %}
+			<div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+			{% endfor %}
+		</div>
+		{% endif %}
+		<form action="" method="POST">
+		{% csrf_token %}
+			{{ form.as_p }}
+			<a href="{% url 'password_reset' %}">পাসওয়ার্ড ভুলে গেছেন?</a> <a href="{% url 'register' %}">নতুন অ্যাকাউন্ট</a>
+			<div class="btn-set">
+				<button type="submit" class="login-button">লগ ইন</button>
+			</div>
+		</form>
+	</div>
+</body>
+{% endblock content %}

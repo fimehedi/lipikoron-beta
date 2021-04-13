@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}নতুন লিপি - লিপিকরণ{% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+{% include 'sidebar-left.html' %}
+			<h1 class="heading">শীঘ্রই আসছে...</h1>
+			<div class="body not-found">
+				<h3>শীঘ্রই আসছে...</h3>
+				<p>এই ফিচারটি এই মুহুর্তে উপলব্ধ নেই, অতি শীঘ্রই এটি যুক্ত করা হবে। <a href="{% url 'index' %}">লিপিফিডে যান</a>।</p>
+			</div>
+{% include 'sidebar-right.html' %}
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

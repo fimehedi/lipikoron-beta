@@ -1,0 +1,44 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Lipikoron - Administration{% endblock %}
+{% block extrastyle %}
+<style>
+    a:link, a:visited{
+        color:#1aa260;
+    }
+    a:hover{
+        color: #00825E;
+    }
+    #header, caption, .module h2, input[type=submit], .object-tools a:hover, .object-tools a:focus{
+        background-color: #1aa260 !important;
+        color:#fff !important;
+    }
+    #header a:hover{
+        color:#f5dd5d;
+    }
+    #site-name a{
+        color:#fff !important;
+    }
+    .breadcrumbs, input[type=submit].default, input[type=submit]:hover{
+        background-color: #00825E !important;
+    }
+    input[type=submit].default:hover{
+        background-color: #007152 !important;
+    }
+    #nav-sidebar .current-model{
+        background: #eee;
+        border-left: 5px solid #1AA260;
+    }
+    @media (max-width:768px){
+        #cke_id_body{
+		    width:310px !important;
+	    }
+    }
+</style>
+
+{% endblock %}
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Lipikoron Admin</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

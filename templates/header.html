@@ -1,0 +1,71 @@
+{% load static %}
+<header>
+	<div class="loader-container">
+        <img class="logo" src="{% static 'images/logo.png' %}">
+    </div>
+	<div class="header-row">
+		<img class="mobile-menu-toggle" src="{% static 'icons/icon-outline/menu.svg' %}" alt="Menu">
+		<div class="mobile-menu">
+			<a class="mobile-menu-toggle-close"><img class="icon" src="{% static 'icons/icon-outline/cross.svg' %}" alt="Close"></a>
+			<div class="mobile-menu-content">
+				<a href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt="Lipikoron" class="logo"></a>
+				<ul>
+					<li><a href="{% url 'coming-soon' %}">আজকের দিনে</a></li>
+					<li><a href="{% url 'lives' %}">লিপিকরণ লাইভ</a></li>
+					<li><a href="{% url 'events' %}">ইভেন্টস</a></li>
+					<li><a href="{% url 'coming-soon' %}">লিপিশিখন</a></li>
+					<li><a href="{% url 'coming-soon' %}">লিপিস্টোর</a></li>
+					<li><a href="{% url 'memes' %}">লিপিমেমস</a></li>
+					<li><a href="{% url 'coming-soon' %}" target="_blank">ক্যরিয়ার্স</a></li>
+					<li><a href="http://www.facebook.com/groups/LipikoronCommunity">কমিউনিটি</a></li>
+				</ul>
+				<div class="smi-set">
+					<a href="http://www.facebook.com/lipikoron" target="_blank"><img class="icon smi smi-facebook" src="{% static 'icons/social-media/facebook.svg' %}"></a>
+					<a href="http://www.instagram.com/lipikoron" target="_blank"><img class="icon smi smi-instagram"
+							src="{% static 'icons/social-media/instagram.svg' %}"></a>
+					<a href="http://www.youtube.com/lipikoron" target="_blank"><img class="icon smi smi-youtube" src="{% static 'icons/social-media/youtube.svg' %}"></a>
+				</div>
+			</div>
+		</div>
+		<a class="header-logo" href="{% url 'index' %}"><img class="logo" src="{% static 'images/logo.png' %}" alt="Lipikoron" /></a>
+		<form class="header-search hide-on-mobile" method="GET" action="{% url 'search' %}">
+			<input id="searchInput" type="search" name="search" value="{{ search }}" placeholder="সার্চ করুন...">
+		</form>
+			<ul class="top-nav hide-on-mobile">
+			<li><a href="{% url 'coming-soon' %}">আজকের দিনে</a></li>
+			<li><a href="{% url 'lives' %}">লিপিকরণ লাইভ</a></li>
+			<li><a href="{% url 'events' %}">ইভেন্টস</a></li>
+		</ul>
+		<div class="header-buttons">
+			{% if request.user.is_authenticated %}
+			<div class="dropdown">
+				<button class="user-menu">
+					<img class="profile-picture"
+					{% if request.user.profile_picture %}
+
+					src="{{ request.user.profile_picture.url }}"
+					{% else %}
+					src="{% static 'images/no-profile-picture.png' %}"
+					{% endif %}
+					alt="Profile Picture" />
+					<span class="hide-on-mobile">{% firstof user.get_full_name user.get_username %}</span> <img class="icon hide-on-mobile" src="{% static 'icons/icon-outline/chevron-down.svg' %}">
+				</button>
+				<div class="dropdown-content">
+					<a href=" {% url 'author' request.user %} ">প্রোফাইল</a>
+					<a href="{% url 'settings' %}">সেটিংস</a>
+					{% if request.user.is_staff %}
+    				<a href="{% url 'admin:index' %}">সাইট অ্যাডমিন</a>
+    				{% endif %}
+					<a href="{% url 'logout' %}">লগ আউট</a>
+				</div>
+			</div>
+			{% else %}
+			<div class="hide-on-mobile">
+				<a href="{% url 'login' %}"><button>লগ ইন</button></a>
+				<a href="{% url 'register' %}"><button class="btn-active">সাইন আপ</button></a>
+			</div>
+			<a class="mobile-login-icon" href="{% url 'login' %}"><img src="{% static 'icons/icon-outline/login.svg' %}" class="icon"></a>
+			{% endif %}
+		</div>
+	</div>
+</header>

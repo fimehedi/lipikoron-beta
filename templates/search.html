@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ search }} - সার্চ রেজাল্ট{% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+{% include 'sidebar-left.html' %}
+<h1 class="heading">সার্চ রেজাল্ট - {{ search }}</h1>
+
+{% for p in post %}
+{% include 'partials/_post.html' %}
+{% empty %}
+<div class="body"><i>কোনও লিপি নেই!</i></div>
+{% endfor %}
+
+{% include 'pagination.html' %}
+
+{% include 'sidebar-right.html' %}
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

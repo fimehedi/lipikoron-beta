@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}নতুন লিপি - লিপিকরণ{% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+{% include 'sidebar-left.html' %}
+			<h1 class="heading">পাওয়া যায়নি!</h1>
+			<div class="body not-found">
+				<h3>দুঃখিত! :(</h3>
+				<p>আপনি যা খুঁজছেন তা এই মুহুর্তে উপলব্ধ নেই। লিপিকরণের নতুন আর্টিকেল পেতে <a href="{% url 'index' %}">লিপিফিডে যান</a>। অথবা সমস্যাটি সম্পর্কে <a href="mailto:support@lipikoron.com">আমাদের জানান</a>।</p>
+			</div>
+{% include 'sidebar-right.html' %}
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

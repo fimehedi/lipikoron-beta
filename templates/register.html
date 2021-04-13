@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}সাইন আপ - লিপিকরণ{% endblock %}
+
+{% block content %}
+<body style="background-color:#fff;">
+	<div class="login register">
+		<div class="login-heading">
+			<h4>সাইন আপ করুন</h4>
+			<img src="{% static 'images/auth.png' %}" alt="Register" />
+		</div>
+
+		{% if messages %}
+		<div class="messages">
+			{% for message in messages %}
+			<div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+			{% endfor %}
+		</div>
+		{% endif %}
+
+		<form action="" method="POST">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<div class="btn-set">
+				<button type="submit" class="login-button"> রেজিস্টার</button>
+			</div>
+		</form>
+	</div>
+</body>
+{% endblock content %}

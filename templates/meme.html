@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}লিপিমীম - লিপিকরণ{% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+{% include 'sidebar-left.html' %}
+
+<h1 class='heading'>লিপিমীম</h1>
+<div class="body">
+    {% for meme in meme %}
+    <div class="meme">
+        <a href="{{ meme.meme.url }}" data-lity>
+            <img src="{{ meme.meme.url }}">
+        </a>
+    </div>
+    {% empty %}
+    <i>কোনো মীম নেই!</i>
+    {% endfor %}
+</div>
+
+{% include "pagination.html" %}
+
+{% include 'sidebar-right.html' %}
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

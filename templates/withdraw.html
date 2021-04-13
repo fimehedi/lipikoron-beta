@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} উইথড্র {% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+{% include 'sidebar-left.html' %}
+
+
+<h1 class="heading">রিওয়ার্ড</h1>
+
+{% if messages %}
+<div class="messages">
+	{% for message in messages %}
+	<div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+	{% endfor %}
+</div>
+{% endif %}
+
+
+<div class="body">
+
+		{% if req %}
+			<table class="dashboard-post-list">
+				<tr>
+					<td class="dashboard-post-conditions-col">Date</td>
+					<td class="dashboard-post-actions-col">Method</td>
+					<td class="dashboard-post-actions-col">Number</td>
+					<td class="dashboard-post-actions-col">Amount</td>
+					<td class="dashboard-post-actions-col">Status</td>
+				</tr>
+
+				{% for r in req %}
+				<tr>
+					<td class="dashboard-post-conditions-col">{{ r.date }}</td>
+					<td class="dashboard-post-actions-col">{{ r.withdraw_method }}</td>
+					<td class="dashboard-post-actions-col">{{ r.account_number }}</td>
+					<td class="dashboard-post-actions-col">{{ r.withdraw_amount }}</td>
+					<td class="dashboard-post-actions-col">
+						{% if r.payment_done %}
+							Success
+						{% else %}
+							Pending
+						{% endif %}
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
+		{% endif %}
+
+	<div class="alert-warning withdraw-note" style="margin-top:25px;">
+	<b>উইথড্র এর শর্তাবলী</b>
+	<ul>
+		<li>উইথড্র অ্যামাউন্ট অবশ্যই সর্বনিম্ন ১০০ টাকা থেকে আপনার ব্যালেন্সের মধ্যে হতে হবে।</li>
+		<li>ভুল নাম্বার দিয়ে তাতে পেমেন্ট পাঠানোর পর তা পরবর্তীতে ফেরত পাওয়া যাবে না।</li>
+		<li>পেমেন্ট রিকোয়েস্ট দেয়ার ২৪ ঘন্টার মধ্যে পেমেন্ট প্রদান করা হবে।</li>
+	</ul>
+	</div>
+
+	<form action="" method="POST" enctype="multipart/form-data" class="create">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<label for="password">Password</label>
+			<input type="password" name="password" placeholder="Your password" autocomplete="off" />
+		<div class="btn-set">
+			<a href="#"><button class="btn-active">সাবমিট করুন</button></a>
+		</div>
+	</form>
+
+</div>
+
+
+{% include 'sidebar-right.html' %}
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

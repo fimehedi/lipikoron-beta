@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}ড্যাশবোর্ড - লিপিকরণ{% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+{% include 'sidebar-left.html' %}
+			<h1 class="heading">ড্যাশবোর্ড</h1>
+			{% if messages %}
+			<div class="messages">
+				{% for message in messages %}
+				<div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+				{% endfor %}
+			</div>
+			{% endif %}
+			<div class="body dashboard-nav-panel">
+				<ul class="dashboard-navigation">
+					<li><a class="active" href="#"><img class="icon" src="{% static 'icons/icon-outline/checkmark.svg' %}"> প্রকাশিত</a></li>|
+					<li><a href="#"><img class="icon" src="{% static 'icons/icon-outline/alert.svg' %}"> প্রক্রিয়াধীন</a></li>|
+					<li><a href="#"><img class="icon" src="{% static 'icons/icon-outline/file-text.svg' %}"> খসড়া</a></li>|
+					<li><a href="#"><img class="icon" src="{% static 'icons/icon-outline/trash.svg' %}"> বাতিল</a></li>
+					<a href="{% url 'create' %}"><button class="btn-active">নতুন লিপি</button></a>
+				</ul>
+			</div>
+			<table class="dashboard-post-list">
+				{% for p in post %}
+				<tr>
+					<td class="dashboard-post-title-col"><a href="{% url 'single_post' id=p.id %}">{{ p.title }}</a></td>
+					<td class="dashboard-post-conditions-col">
+						<ul class="dashboard-post-action-conditions">
+							<li><img class="icon" src="{% static 'icons/icon-outline/calendar.svg' %}"> {{ p.posted_on }}</li>
+							<li><img class="icon" src="{% static 'icons/icon-outline/eye.svg' %}"> {{ p.views }}</li>
+
+							<li>
+							{% if p in request.user.like_post.all %}
+							<img class="icon" src="{% static 'icons/icon-outline/heart-solid.svg' %}">
+							{% else %}
+							<img class="icon" src="{% static 'icons/icon-outline/heart.svg' %}">
+							{% endif %}
+							{{ p.likes.count }}</li>
+
+						</ul>
+					</td>
+					<td class="dashboard-post-actions-col"><a href="{% url 'update' id=p.id %}">সম্পাদন</a> | <a href="{% url 'delete' id=p.id %}">বাতিল</a></td>
+				</tr>
+				{% endfor %}
+			</table>
+
+			{% include 'pagination.html' %}
+
+{% include 'sidebar-right.html' %}
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

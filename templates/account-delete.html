@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}অ্যাকাউন্ট ডিলিট - লিপিকরণ{% endblock title %}
+
+{% block header %}
+	{% include 'header.html' %}
+{% endblock header %}
+
+{% block content %}
+{% include 'sidebar-left.html' %}
+	<h1 class="heading">সেটিংস</h1>
+
+	{% if messages %}
+	<div class="messages">
+		{% for message in messages %}
+		<div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+		{% endfor %}
+	</div>
+	{% endif %}
+
+	<div class="body settings">
+		<form action="{% url 'account_delete' %}" method="POST">
+			{% csrf_token %}
+
+			<label for="f_name">পাসওয়ার্ড</label>
+			<input type="password" name="password" value="" placeholder="আপনার পাসওয়ার্ড" required />
+
+			<div class="btn-set">
+				<a href="{% url 'account_delete' %}"><button class="btn-active">অ্যাকাউন্ট ডিলিট</button></a>
+			</div>
+		</form>
+
+	</div>
+{% include 'sidebar-right.html' %}
+{% endblock content %}
+
+{% block footer %}
+	{% include 'footer.html' %}
+{% endblock footer %}

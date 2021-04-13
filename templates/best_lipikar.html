@@ -1,0 +1,14 @@
+{% load static %}
+
+{% for lipikar in best_lipikar %}
+<li>
+    <img class="profile-picture"
+        {% if lipikar.profile_picture %}
+        src="{{ lipikar.profile_picture.url }}"
+        {% else %}
+        src="{% static 'images/no-profile-picture.png' %}"
+        {% endif %}
+        alt="Profile Picture" />
+    <a href="{% url 'author' lipikar.username %}">{{ lipikar.get_full_name }}</a>
+</li>
+{% endfor %}

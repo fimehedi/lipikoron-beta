@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}লিপিকার ফর্ম - লিপিকরণ{% endblock %}
+
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+
+{% block content %}
+{% include 'sidebar-left.html' %}
+<h1 class="heading">লিপিকার ফর্ম</h1>
+<div class="body lipikar-form">
+    <form action="" method="POST", enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="btn-set">
+            <button type="submit">সাবমিট করুন</button>
+        </div>
+    </form>
+</div>
+
+{% include 'sidebar-right.html' %}
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}
