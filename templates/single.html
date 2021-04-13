@@ -16,7 +16,13 @@
 			<div class="single-info">
 				<h1>{{ post.title }}</h1>
 				<div class="single-author">
-					<img class="profile-picture" src="{{ post.author.profile_picture.url }}" alt="Profile Picture" />
+					<img class="profile-picture"
+					{% if comment.user.profile_picture %}
+					src="{{ comment.user.profile_picture.url }}"
+					{% else %}
+					src="{% static 'images/no-profile-picture.png' %}"
+					{% endif %}
+					alt="Profile Picture" />
 					<div class="single-author-info">
 						<a href="{% url 'author' post.author.username %}">
 							<h2>{{ post.author.get_full_name }} <img class="verification-badge" src="{% static 'icons/icon-outline/check-circle.svg' %}"></h2>
