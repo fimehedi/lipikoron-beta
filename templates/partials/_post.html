@@ -9,8 +9,12 @@
             <a href="{% url 'single_post' id=p.id %}">
                 <h1>{{ p.title }}</h1>
             </a>
-            <p class="desktop-excerpt hide-on-mobile">{{ p.body|truncatewords:50 }}</p>
-            <p class="mobile-excerpt">{{ p.body|truncatewords:20 }}</p>
+            {% if request.user_agent.is_mobile %}
+                <p class="mobile-excerpt">{{ p.body|truncatewords:20|safe }}</p>
+            {% else %}
+            <p class="desktop-excerpt hide-on-mobile">{{ p.body|truncatewords:50|safe }}</p>
+            {% endif %}
+
         </div>
     </div>
     <ul class="archive-actions">
