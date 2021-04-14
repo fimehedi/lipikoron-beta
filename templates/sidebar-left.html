@@ -1,3 +1,4 @@
+{% load notification_tags %}
 {% load static %}
 <!-- Main Body -->
 <section class="main-body">
@@ -16,7 +17,7 @@
                 </div>
             </li>
             <li class="tab-item">
-                <a class="tab-button" href="{% url 'notification' %}"><img class="icon-white" src="{% static 'icons/left-nav/bell.svg' %}"><span>নোটিফিকেশন</span></a>
+                <a class="tab-button" href="{% url 'notification' %}"><img class="icon-white" src="{% static 'icons/left-nav/bell.svg' %}"><span>নোটিফিকেশন {% unread_notification request.user %}</span></a>
             </li>
             <li class="tab-item">
                 <a class="tab-button" href="{% url 'leaderboard' %}"><img class="icon-white" src="{% static 'icons/left-nav/hash.svg' %}"><span>লিডারবোর্ড</span></a>

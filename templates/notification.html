@@ -13,7 +13,23 @@
 <h1 class="heading">নোটিফিকেশন</h1>
 
 
-{% for noti in notifications %}
+{% for noti in new_notifications %}
+<div class="notification">
+	{% if noti.notification_type == 1 %}
+		<img class="icon" src="{% static 'icons/icon-outline/heart.svg' %}">
+		<a href="{% url 'single_post' noti.post.id %}">{{ noti.sender.get_full_name }} আপনার লিপিতে লাইক করেছেন। <small>(new)</small></a>
+		<p>{{ noti.date }}</p>
+	{% elif noti.notification_type == 2 %}
+		<img class="icon" src="{% static 'icons/icon-outline/message.svg' %}">
+		<a href="{% url 'single_post' noti.post.id %}">{{ noti.sender.get_full_name }} আপনার লিপিতে কমেন্ট করেছেন। <small>(new)</small></a>
+		<p>{{ noti.date }}</p>
+	{% endif %}
+</div>
+{% endfor %}
+
+
+
+{% for noti in old_notifications %}
 <div class="notification">
 	{% if noti.notification_type == 1 %}
 		<img class="icon" src="{% static 'icons/icon-outline/heart.svg' %}">
