@@ -22,7 +22,7 @@
 			src="{% static 'images/no-profile-picture.png' %}"
 			{% endif %}
 			alt="Profile Picture" />
-			<a href="{% url 'author' lipikar.username %}">{{ lipikar.get_full_name }}</a>
+			<a href="{% url 'author' lipikar.username %}">{% firstof lipikar.get_full_name lipikar.get_username %}</a>
 		</li>
 		{% endfor %}
 	</ol>

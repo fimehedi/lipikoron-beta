@@ -23,7 +23,7 @@
                         src="{% static 'icons/icon-outline/fire.svg' %}"> {{ p.category.name }}</a></li>
         </span>
         <li><a href="{% url 'author' name=p.author.username %}"><img class="icon" src="{% static 'icons/icon-outline/user.svg' %}">
-            {{ p.author.get_full_name }}</a></li>
+            {% firstof p.author.get_full_name p.author.get_username %}</a></li>
         <li><a><img class="icon" src="{% static 'icons/icon-outline/calendar.svg' %}"> {{ p.posted_on|date:"M d, Y" }}</a>
         </li>
         <span>
