@@ -194,7 +194,6 @@ def getDashboard(request):
 
 @login_required
 def like(request):
-    print(request.user)
     if request.method == "POST":
         if request.POST.get('operation') == 'like' and request.is_ajax():
             post_id = request.POST.get('post_id', None)

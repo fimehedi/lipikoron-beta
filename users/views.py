@@ -14,7 +14,6 @@ from .forms import CustomUserCreationForm, SettingsForm
 @csrf_protect
 def getRegister(request):
     form = CustomUserCreationForm(request.POST or None)
-    print(form.data)
 
     if form.is_valid():
         isinstance = form.save(commit = False)
