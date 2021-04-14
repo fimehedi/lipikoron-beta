@@ -147,6 +147,11 @@ button:focus{
 	height:13px;
 	width:13px;
 }
+/* Count badge */
+.count{
+    border-radius: 50px;
+    padding: 0px 3px;
+}
 /* Icon defaults */
 .icon, .icon-white{
 	vertical-align:middle;
@@ -443,22 +448,23 @@ header{
 	background-color:#fff;
 	color:#333;
 }
-.hero-counter{
+.hero-category{
+	margin-top:30px;
+	background-color:#fff3;
+}
+.category-scroll{
+	margin:auto;
+	padding:0;
 	list-style: none;
-    display: flex;
-	padding: 0;
-	justify-content: center;
+	display:flex;
+	max-width: 300px;
+	overflow-x:auto;
 }
-.hero-counter li{
-	padding:0 20px;
-	border-right:3px solid #fff;
+.category-scroll a{
+	color:#fff;;
 }
-.hero-counter li:last-child{
-	border:none;
-}
-.hero-counter li b{
-	display: block;
-    font-size: 20px;
+.category-scroll li{
+	margin:10px 15px;
 }
 .scroll-button{
 	display:none;
@@ -682,6 +688,14 @@ footer{
 }
 .mobile-nav .icon{
 	height:24px;
+}
+.mobile-nav .count{
+	background: #1aa260;
+    color: #fff;
+	font-size: 10px;
+	position: absolute;
+    top: 3px;
+    left: 31%;
 }
 /* Archive Post */
 .archive-post{
