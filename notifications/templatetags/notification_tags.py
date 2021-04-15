@@ -6,4 +6,5 @@ register = template.Library()
 
 @register.simple_tag
 def unread_notification(user=None):
-    return Notification.objects.filter(user=user, is_seen=False).count()
+    if user.is_authenticated:
+        return Notification.objects.filter(user=user, is_seen=False).count()
