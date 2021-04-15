@@ -1,3 +1,4 @@
+{% load notification_tags %}
 {% load static %}
 <footer class="hide-on-mobile">
 	<div class="footer-row">
@@ -52,7 +53,15 @@
 		<img class="icon" src="{% static 'icons/mobile-nav/home.svg' %}">
 	</a>
 	<a href="{% url 'notification' %}">
-		<span class="count">10+</span>
+	{% url 'notification' as npath %}
+	{% if request.path != npath %}
+
+		{% unread_notification request.user as unread %}
+		{% if unread %}
+			<span class="count">{% unread_notification request.user %}</span>
+		{% endif %}
+
+	{% endif %}
 		<img class="icon" src="{% static 'icons/mobile-nav/notification.svg' %}">
 	</a>
 	<a href="{% url 'dashboard' %}">

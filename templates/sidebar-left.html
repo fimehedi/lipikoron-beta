@@ -17,7 +17,17 @@
                 </div>
             </li>
             <li class="tab-item">
-                <a class="tab-button" href="{% url 'notification' %}"><img class="icon-white" src="{% static 'icons/left-nav/bell.svg' %}"><span>নোটিফিকেশন {% unread_notification request.user %}</span></a>
+                <a class="tab-button" href="{% url 'notification' %}"><img class="icon-white" src="{% static 'icons/left-nav/bell.svg' %}"><span>নোটিফিকেশন
+                {% url 'notification' as npath %}
+                {% if request.path != npath %}
+
+                {% unread_notification request.user as unread %}
+                {% if unread %}
+                    <span class="count">{% unread_notification request.user %}</span>
+                {% endif %}
+
+                {% endif %}
+        </span></a>
             </li>
             <li class="tab-item">
                 <a class="tab-button" href="{% url 'leaderboard' %}"><img class="icon-white" src="{% static 'icons/left-nav/hash.svg' %}"><span>লিডারবোর্ড</span></a>
