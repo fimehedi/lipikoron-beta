@@ -43,6 +43,24 @@ class article(models.Model):
         return self.title
 
 
+class FeaturedPost(models.Model):
+    post = models.OneToOneField(article, on_delete=models.CASCADE)
+
+    POSITION_CHOICES = (
+        (1, 'Top'),
+        (2, 'Middle'),
+        (3, 'Down'),
+    )
+
+    position = models.IntegerField(
+        choices=POSITION_CHOICES,
+        unique=True
+    )
+
+    def __str__(self):
+        return f"{self.post} on {self.position} position"
+
+
 class comment(models.Model):
     post            = models.ForeignKey(article, on_delete = models.CASCADE)
     user            = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)

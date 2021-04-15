@@ -14,19 +14,24 @@ from django.contrib.auth.hashers import check_password
 # from hitcount.views import HitCountMixin
 
 from . forms import createForm, commentForm, ReportForm, WithdrawForm
-from . models import category, article, comment, Withdraw
+from . models import category, article, comment, Withdraw, FeaturedPost
 from . pagination import pagination
 from notifications.models import Notification
 
 
 # Create your views here.
 def index(request):
+    featured_posts = FeaturedPost.objects.all().order_by('position')
     post = article.objects.all().order_by('-id')
     cat = category.objects.all()
 
+    print(featured_posts)
+    print(post)
+
     context = {
         "post": pagination(request, post, 15),
-        "category": cat
+        "category": cat,
+        "featured_posts": featured_posts
     }
     return render(request, "index.html", context)
 

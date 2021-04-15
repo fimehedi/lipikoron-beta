@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import category, article, comment, Report, Withdraw
+from . models import category, article, comment, Report, Withdraw, FeaturedPost
 
 # Register your models here.
 # class authorModel(admin.ModelAdmin):
@@ -31,6 +31,16 @@ class articleModel(ImportExportModelAdmin):
     class Meta:
         Model = article
 admin.site.register(article, articleModel)
+
+
+class FeaturedPostModel(ImportExportModelAdmin):
+    list_display = ["__str__", "post", "position"]
+    list_filter = ["post", "position"]
+    list_per_page = 3
+    search_fields = ["__str__", "post"]
+    class Meta:
+        Model = FeaturedPost
+admin.site.register(FeaturedPost, FeaturedPostModel)
 
 
 class commentModel(ImportExportModelAdmin):
