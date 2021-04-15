@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = 'jez1h0(epvac5y8wiu7t5^hz6n04x)x$uh-p*@c9(j-39mcsab'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'django_user_agents',
     'import_export',
-    'admin_reorder',
     # 'hitcount' # For advance Hit count
 ]
 
@@ -96,7 +95,6 @@ MIDDLEWARE = [
 
     # Third Party
     'django_user_agents.middleware.UserAgentMiddleware',
-    'admin_reorder.middleware.ModelAdminReorder',
 ]
 
 ROOT_URLCONF = 'lipikoron.urls'
@@ -200,62 +198,3 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 # Email
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-
-# ADMIN_REORDER = (
-#     'sites',
-#     {'app': 'users', 'label': 'Authorisation'},
-#     {'app': 'users', 'models': ('auth.User', 'auth.Group')},
-#     # First group
-#     # {'app': 'users', 'label': 'Group1',
-#     #  'models': ('users.CustomUser',
-#     #             )
-#     # },
-#     # # Second group: same app, but different label
-#     # {'app': 'blog', 'label': 'Group2',
-#     #  'models': ('blog.article',)
-#     },)
-
-ADMIN_REORDER = (
-    # Keep original label and models
-    # 'sites',
-
-    # Rename app
-
-
-    # # Reorder app models
-    # {'app': 'auth', 'models': ('auth.User', 'auth.Group')},
-
-    # # Exclude models
-    # {'app': 'auth', 'models': ('auth.User', )},
-
-    # Cross-linked models
-    {
-        'app'       : 'auth',
-        'label'     : 'AUTHENTICATION & AUTHORIZATION | Withdraw | Notifications',
-        'models'    : (
-            'auth.Group',
-            'users.CustomUser',
-            'blog.Withdraw',
-            'notifications.Notification',
-    )},
-
-    {
-        'app'       : 'blog',
-        'models'    : (
-            'blog.article',
-            'blog.category',
-            'blog.FeaturedPost',
-            'blog.comment',
-            'blog.Report'
-
-        )},
-
-    {'app': 'features'},
-
-    # # models with custom name
-    # {'app': 'auth', 'models': (
-    #     'auth.Group',
-    #     {'model': 'users.CustomUser', 'label': 'Users'},
-    # )},
-)
