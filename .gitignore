@@ -1,14 +1,6 @@
-<<<<<<< HEAD
 .vscode/
 db.sqlite3
 Pipfile
 Pipfile.lock
 media/*
 .vscode/
-=======
-db.sqlite3
-Pipfile
-Pipfile.lock
-media/*
-.vscode/
->>>>>>> b158309b7d9a8b80440f548ef4b31cc0e730bfaa
