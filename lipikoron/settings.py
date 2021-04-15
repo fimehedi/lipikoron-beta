@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = 'jez1h0(epvac5y8wiu7t5^hz6n04x)x$uh-p*@c9(j-39mcsab'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -113,6 +113,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+        'libraries':{
+            'blog_tags': 'blog.templatetags.blog_tags',
+            'notification_tags': 'notifications.templatetags.notification_tags',
+            }
         },
     },
 ]
@@ -202,32 +206,9 @@ AUTH_USER_MODEL = 'users.CustomUser'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
-# ADMIN_REORDER = (
-#     'sites',
-#     {'app': 'users', 'label': 'Authorisation'},
-#     {'app': 'users', 'models': ('auth.User', 'auth.Group')},
-#     # First group
-#     # {'app': 'users', 'label': 'Group1',
-#     #  'models': ('users.CustomUser',
-#     #             )
-#     # },
-#     # # Second group: same app, but different label
-#     # {'app': 'blog', 'label': 'Group2',
-#     #  'models': ('blog.article',)
-#     },)
-
 ADMIN_REORDER = (
     # Keep original label and models
-    # 'sites',
-
-    # Rename app
-
-
-    # # Reorder app models
-    # {'app': 'auth', 'models': ('auth.User', 'auth.Group')},
-
-    # # Exclude models
-    # {'app': 'auth', 'models': ('auth.User', )},
+    'sites',
 
     # Cross-linked models
     {
@@ -252,10 +233,4 @@ ADMIN_REORDER = (
         )},
 
     {'app': 'features'},
-
-    # # models with custom name
-    # {'app': 'auth', 'models': (
-    #     'auth.Group',
-    #     {'model': 'users.CustomUser', 'label': 'Users'},
-    # )},
 )
