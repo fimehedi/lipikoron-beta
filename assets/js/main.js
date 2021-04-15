@@ -15,29 +15,6 @@ $(window).on("load",function(){
 });
 
 
-// Topbar Animation
-$(function() {
-   prettyPrint()
-   function resetToDefaults() {
-      topbar.config({
-         autoRun      : true,
-         barThickness : 2,
-         barColors    : {'0': 'rgba(26, 162, 96, 1)',},
-         shadowBlur   : 0,
-         shadowColor  : 'rgba(0,   0,   0,   .6)',
-         className    : 'topbar'
-      })
-   }
-   // Page load
-   resetToDefaults()
-   topbar.show()
-   setTimeout(function() {
-      $('#main_content').fadeIn('slow')
-      topbar.hide()
-   }, 1000)
-})
-
-
 // Infinity Quote
 var slides = document.querySelectorAll('.infinity-quote .slide');
 var currentSlide = 0;
