@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% load notification_tags %}
 {% load static %}
 <footer class="hide-on-mobile">
@@ -73,4 +74,72 @@
 	<a href="{% url 'activity' %}">
 		<img class="icon" src="{% static 'icons/mobile-nav/megaphone.svg' %}">
 	</a>
+=======
+{% load static %}
+<footer class="hide-on-mobile">
+	<div class="footer-row">
+		<div class="footer-col">
+			<h3>আমাদের সম্পর্কে</h3>
+			<a href="{% url 'index' %}"><img src="{% static 'images/logo-white.png' %}" alt="Lipikoron" class="logo" /></a>
+			<a href="#"><img class="play-store-logo" src="{% static 'images/google-play-badge.png' %}" alt="Get it on Google Play"></a>
+		</div>
+		<div class="footer-col">
+			<h3>কুইক লিংকস</h3>
+			<ul class="footer-menu">
+				<li><a href="#">লিপিকার হোন</a></li>
+				<li><a href="#">নীতিমালা শর্তাবলী</a></li>
+				<li><a href="#">কপিরাইট ইস্যু</a></li>
+				<li><a href="#">প্রশ্নোত্তর</a></li>
+				<li><a href="#">রিপোর্ট করুন</a></li>
+			</ul>
+		</div>
+		<div class="footer-col">
+			<h3>আরও জানুন</h3>
+			<ul class="footer-menu">
+				<li><a href="#">আমাদের কথা</a></li>
+				<li><a href="#">বিজ্ঞাপন</a></li>
+				<li><a href="#">যোগাযোগ</a></li>
+				<li><a href="#">ডি.এম.সি.এ</a></li>
+				<li><a href="{% url 'team' %}">আমাদের টিম</a></li>
+			</ul>
+		</div>
+		<div class="footer-col">
+			<h3>যোগাযোগ</h3>
+			<ul class="footer-contact-info">
+				<li><img class="icon-white" src="{% static 'icons/icon-outline/mail.svg' %}"> <a
+						href="mailto:contact@lipikoron.com">contact@lipikoron.com</a></li>
+				<li><img class="icon-white" src="{% static 'icons/icon-outline/phone.svg' %}"> <a
+						href="tel:contact@lipikoron.com">+8801708777376</a></li>
+			</ul>
+			<div class="smi-set">
+				<a href="http://www.facebook.com/lipikoron" target="_blank"><img class="icon smi smi-facebook" src="{% static 'icons/social-media/facebook.svg' %}"></a>
+				<a href="http://www.instagram.com/lipikoron" target="_blank"><img class="icon smi smi-instagram"
+						src="{% static 'icons/social-media/instagram.svg' %}"></a>
+				<a href="http://www.youtube.com/lipikoron" target="_blank"><img class="icon smi smi-youtube" src="{% static 'icons/social-media/youtube.svg' %}"></a>
+			</div>
+		</div>
+	</div>
+	<p class="footer-copyright">কপিরাইট &copy; ২০২০ <a href="{% url 'index' %}">লিপিকরণ</a> | সর্বস্বত্ব সংরক্ষিত</p>
+</footer>
+<!-- Go to top button -->
+<a class="create-button" href="{% url 'create' %}"><img class="icon-white" src="{% static 'icons/icon-outline/edit.svg' %}"></a>
+<!-- Mobile Bottom Navbar -->
+<nav class="mobile-nav">
+	<a href="{% url 'index' %}">
+		<img class="icon" src="{% static 'icons/mobile-nav/home.svg' %}">
+	</a>
+	<a href="{% url 'notification' %}">
+		<span class="count">10+</span>
+		<img class="icon" src="{% static 'icons/mobile-nav/notification.svg' %}">
+	</a>
+	<a href="{% url 'dashboard' %}">
+		<img class="icon" src="{% static 'icons/mobile-nav/dashboard.svg' %}">
+	</a>
+	<a href="{% url 'bookmark' %}">
+		<img class="icon" src="{% static 'icons/mobile-nav/bookmark.svg' %}">
+	</a>
+	<a href="{% url 'activity' %}">
+		<img class="icon" src="{% static 'icons/mobile-nav/megaphone.svg' %}">
+	</a>
+>>>>>>> b158309b7d9a8b80440f548ef4b31cc0e730bfaa
 </nav>

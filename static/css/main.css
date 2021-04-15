@@ -213,7 +213,7 @@ button:focus{
 }
 .dropdown-content{
 	max-height: 315px;
-    overflow-y: scroll;
+    overflow-y: auto;
 	margin:10px 0;
 	display:none;
 	position:absolute;

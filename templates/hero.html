@@ -9,6 +9,13 @@
             <a href="#lipifeed"><button>শিখুন</button></a>
             <a href="{% url 'create' %}"><button class="btn-active">শেখান</button></a>
         </div>
+        <ul class="category-scroll">
+            {% for category in category %}
+            <a href="{% url 'category' name=category.name %}">
+                <li>{{ category.name }}</li>
+            </a>
+            {% endfor %}
+        </ul>
     </div>
 </section>
 <div class="scroll-button">

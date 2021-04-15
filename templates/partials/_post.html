@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% load static %}
 <div class="body archive-post" id="lipifeed">
     <div class="archive-body">
@@ -50,4 +51,58 @@
         </li>
 
     </ul>
+=======
+{% load static %}
+<div class="body archive-post" id="lipifeed">
+    <div class="archive-body">
+        <img class="archive-thumbnail" src="{{ p.thumbnail.url }}" alt="Thumbnail" />
+        <div class="archive-category-button">
+            <a href="{% url 'category' name=p.category.name %}" class="archive-category">{{ p.category.name }}</a>
+        </div>
+        <div class="archive-info">
+            <a href="{% url 'single_post' id=p.id %}">
+                <h1>{{ p.title }}</h1>
+            </a>
+            {% if request.user_agent.is_mobile %}
+                <p class="mobile-excerpt">{{ p.body|truncatewords:20|safe }}</p>
+            {% else %}
+            <p class="desktop-excerpt hide-on-mobile">{{ p.body|truncatewords:50|safe }}</p>
+            {% endif %}
+
+        </div>
+    </div>
+    <ul class="archive-actions">
+        <span class="badge-transparent">
+            <li><a href="{% url "category" name=p.category.name %}"><img class="icon"
+                        src="{% static 'icons/icon-outline/fire.svg' %}"> {{ p.category.name }}</a></li>
+        </span>
+        <li><a href="{% url 'author' name=p.author.username %}"><img class="icon" src="{% static 'icons/icon-outline/user.svg' %}">
+            {{ p.author.get_full_name }}</a></li>
+        <li><a><img class="icon" src="{% static 'icons/icon-outline/calendar.svg' %}"> {{ p.posted_on|date:"M d, Y" }}</a>
+        </li>
+        <span>
+            <li><a><img class="icon" src="{% static 'icons/icon-outline/eye.svg' %}"> {{ p.views }}</a></li>
+        </span>
+
+        <li><a class="likeBtn" name="{{ p.id }}" style="cursor:pointer">
+        {% if p in request.user.like_post.all %}
+        <img id="post{{ p.id }}LikeIcon" class="icon" src="{% static 'icons/icon-outline/heart-solid.svg' %}">
+        {% else %}
+        <img id="post{{ p.id }}LikeIcon" class="icon" src="{% static 'icons/icon-outline/heart.svg' %}">
+        {% endif %}
+        <span id="post{{ p.id }}TotalLike">{{ p.likes.count }}</span></a></li>
+
+        <li>
+            <a class="bookmark" name="{{ p.id }}" style="cursor:pointer">
+            {% if p in request.user.bookmark.all %}
+                <img id="post{{ p.id }}" class="icon" src="{% static 'icons/icon-outline/bookmark-solid.svg' %}">
+            {% else %}
+                <img id="post{{ p.id }}" class="icon" src="{% static 'icons/icon-outline/bookmark.svg' %}">
+            {% endif %}
+                <span>বুকমার্ক</span>
+            </a>
+        </li>
+
+    </ul>
+>>>>>>> b158309b7d9a8b80440f548ef4b31cc0e730bfaa
 </div>
