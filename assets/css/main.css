@@ -12,6 +12,27 @@
 html{
 	scroll-behavior:smooth;
 }
+/* Progress bar */
+.pace {
+	-webkit-pointer-events: none;
+	pointer-events: none;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+.pace-inactive {
+	display: none;
+}
+.pace .pace-progress {
+	background: #3BC57A;
+	position: fixed;
+	z-index: 2000;
+	top: 0;
+	right: 100%;
+	width: 100%;
+	height: 2px;
+}
 /* Inner body defaults */
 body{
 	margin:0;
@@ -125,6 +146,11 @@ button:focus{
 .verification-badge{
 	height:13px;
 	width:13px;
+}
+/* Count badge */
+.count{
+    border-radius: 50px;
+    padding: 0px 3px;
 }
 /* Icon defaults */
 .icon, .icon-white{
@@ -422,22 +448,23 @@ header{
 	background-color:#fff;
 	color:#333;
 }
-.hero-counter{
+.hero-category{
+	margin-top:30px;
+	background-color:#fff3;
+}
+.category-scroll{
+	margin:auto;
+	padding:0;
 	list-style: none;
-    display: flex;
-	padding: 0;
-	justify-content: center;
+	display:flex;
+	max-width: 300px;
+	overflow-x:auto;
 }
-.hero-counter li{
-	padding:0 20px;
-	border-right:3px solid #fff;
+.category-scroll a{
+	color:#fff;;
 }
-.hero-counter li:last-child{
-	border:none;
-}
-.hero-counter li b{
-	display: block;
-    font-size: 20px;
+.category-scroll li{
+	margin:10px 15px;
 }
 .scroll-button{
 	display:none;
@@ -661,6 +688,14 @@ footer{
 }
 .mobile-nav .icon{
 	height:24px;
+}
+.mobile-nav .count{
+	background: #1aa260;
+    color: #fff;
+	font-size: 10px;
+	position: absolute;
+    top: 3px;
+    left: 31%;
 }
 /* Archive Post */
 .archive-post{
