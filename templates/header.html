@@ -29,7 +29,7 @@
 		</div>
 		<a class="header-logo" href="{% url 'index' %}"><img class="logo" src="{% static 'images/logo.png' %}" alt="Lipikoron" /></a>
 		<form class="header-search hide-on-mobile" method="GET" action="{% url 'search' %}">
-			<input id="searchInput" type="search" name="search" value="{{ search }}" placeholder="সার্চ করুন...">
+			<input id="searchInput" type="search" name="search" value="{{ request.GET.search }}" placeholder="সার্চ করুন...">
 		</form>
 			<ul class="top-nav hide-on-mobile">
 			<li><a href="{% url 'coming-soon' %}">আজকের দিনে</a></li>

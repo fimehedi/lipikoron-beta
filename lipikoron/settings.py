@@ -14,6 +14,15 @@ from django.contrib.messages import constants as messages
 import os
 from pathlib import Path
 
+import environ
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+# reading .env file
+environ.Env.read_env()
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
@@ -22,10 +31,11 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'jez1h0(epvac5y8wiu7t5^hz6n04x)x$uh-p*@c9(j-39mcsab'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = env('DEBUG')
+print(DEBUG)
 
 ALLOWED_HOSTS = ['*']
 
@@ -124,7 +134,7 @@ WSGI_APPLICATION = 'lipikoron.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, env('DATABASE_URL')),
     }
 }
 

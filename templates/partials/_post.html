@@ -10,9 +10,9 @@
                 <h1>{{ p.title }}</h1>
             </a>
             {% if request.user_agent.is_mobile %}
-                <p class="mobile-excerpt">{{ p.body|truncatewords:20|safe }}</p>
+                <p class="mobile-excerpt">{{ p.body|truncatewords:20|striptags }}</p>
             {% else %}
-            <p class="desktop-excerpt hide-on-mobile">{{ p.body|truncatewords:50|safe }}</p>
+            <p class="desktop-excerpt hide-on-mobile">{{ p.body|truncatewords:50|striptags }}</p>
             {% endif %}
 
         </div>

@@ -10,9 +10,9 @@
                 <h1>{{ p.post.title }}</h1>
             </a>
             {% if request.user_agent.is_mobile %}
-                <p class="mobile-excerpt">{{ p.post.body|truncatewords:20|safe }}</p>
+                <p class="mobile-excerpt">{{ p.post.body|truncatewords:20|striptags }}</p>
             {% else %}
-            <p class="desktop-excerpt hide-on-mobile">{{ p.post.body|truncatewords:50|safe }}</p>
+            <p class="desktop-excerpt hide-on-mobile">{{ p.post.body|truncatewords:50|striptags }}</p>
             {% endif %}
 
         </div>
@@ -31,7 +31,7 @@
         </span>
 
         <li><a class="likeBtn" name="{{ p.post.id }}" style="cursor:pointer">
-        {% if p in request.user.like_post.all %}
+        {% if p.post in request.user.like_post.all %}
         <img id="post{{ p.post.id }}LikeIcon" class="icon" src="{% static 'icons/icon-outline/heart-solid.svg' %}">
         {% else %}
         <img id="post{{ p.post.id }}LikeIcon" class="icon" src="{% static 'icons/icon-outline/heart.svg' %}">
@@ -40,7 +40,7 @@
 
         <li>
             <a class="bookmark" name="{{ p.post.id }}" style="cursor:pointer">
-            {% if p in request.user.bookmark.all %}
+            {% if p.post in request.user.bookmark.all %}
                 <img id="post{{ p.post.id }}" class="icon" src="{% static 'icons/icon-outline/bookmark-solid.svg' %}">
             {% else %}
                 <img id="post{{ p.post.id }}" class="icon" src="{% static 'icons/icon-outline/bookmark.svg' %}">

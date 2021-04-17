@@ -23,8 +23,6 @@ def getRegister(request):
 
     if form.errors:
         messages.error(request, "রেজিস্ট্রেশন সফল হয়নি!")
-        for msg in form.error_messages:
-            messages.info(request, form.error_messages[msg])
 
     return render(request, "register.html", {"form" : form})
 

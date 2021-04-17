@@ -22,11 +22,8 @@ from notifications.models import Notification
 # Create your views here.
 def index(request):
     featured_posts = FeaturedPost.objects.all().order_by('position')
-    post = article.objects.all().order_by('-id')
+    post = article.objects.all().order_by('-posted_on')
     cat = category.objects.all()
-
-    print(featured_posts)
-    print(post)
 
     context = {
         "post": pagination(request, post, 15),
@@ -64,7 +61,7 @@ def notFound(request, exception):
 
 def getAuthor(request, name):
     authorData = get_object_or_404(get_user_model(), username=name)
-    post = article.objects.filter(author__username = authorData).order_by('-id')
+    post = article.objects.filter(author__username = authorData).order_by('-posted_on')
 
     total_views = 0
     total_likes = 0
@@ -138,7 +135,7 @@ def getSingle(request, id):
 
 def getCategory(request, name):
     cat = get_object_or_404(category, name = name)
-    post = article.objects.filter(category = cat.id).order_by('-id')
+    post = article.objects.filter(category = cat.id).order_by('-posted_on')
 
     return render(request, "category.html", {
         "post": pagination(request, post, 15),
@@ -160,7 +157,7 @@ def getCreate(request):
         user.save()
         messages.success(request, 'আপনার লিপিটি প্রকাশ করা হয়েছে!')
         return redirect("dashboard")
-    return render(request, "create.html", {"form" : form})
+    return render(request, "create.html", {"form" : form, 'title': 'নতুন লিপি'})
 
 
 @login_required
@@ -176,7 +173,7 @@ def getUpdate(request, id):
         isinstance.save()
         messages.info(request, 'আপনার লিপিটি আপডেট করা হয়েছে!')
         return redirect("dashboard")
-    return render(request, "create.html", {"form" : form})
+    return render(request, "create.html", {"form" : form, 'title': 'লিপি সম্পাদন'})
 
 
 @login_required
@@ -266,7 +263,7 @@ def bookmark(request):
             ctx = {'is_bookmark': is_bookmark, 'post_id': post_id}
             return HttpResponse(json.dumps(ctx), content_type='application/json')
 
-    post = request.user.bookmark.all().order_by('id')
+    post = request.user.bookmark.all().order_by('-posted_on')
     return render(request, 'bookmarks.html', {
         "post": pagination(request, post, 15),
     })

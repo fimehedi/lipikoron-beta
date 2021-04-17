@@ -50,9 +50,11 @@
 	{% endif %}
 </div>
 {% empty %}
+{% if not new_notifications %}
 <div class="body">
 	<i>কোনো নোটিফিকেশন নেই!</i>
 </div>
+{% endif %}
 {% endfor %}
 
 {% comment %} <div class="notification">

@@ -2,7 +2,7 @@
 <section class="hero">
     <div class="hero-content">
         <h1>লিপিকরণে খুঁজুন আপনার যা জানতে ইচ্ছা...</h1>
-        <form method="GET">
+        <form method="GET" action="{% url 'search' %}">
             <input id="mobileSearchInput" type="search" name=search value="{{ request.GET.search }}" class="hero-search" placeholder="সার্চ করুন..."><button type="submit" class="btn-active hero-search-button">সার্চ</button>
         </form>
         <div class="btn-set">
