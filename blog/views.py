@@ -9,14 +9,10 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.hashers import check_password
 
-# For hit count
-# from hitcount.utils import get_hitcount_model
-# from hitcount.views import HitCountMixin
-
-from . forms import createForm, commentForm, ReportForm, WithdrawForm
-from . models import category, article, comment, Withdraw, FeaturedPost
+from . forms import createForm, commentForm, ReportForm
+from . models import category, article, comment, FeaturedPost
 from . pagination import pagination
-from notifications.models import Notification
+from users.models import Notification
 
 
 # Create your views here.
@@ -46,7 +42,7 @@ def getSearch(request):
             ).order_by('-id')
 
         context = {
-            "post": pagination(request, post, 1),
+            "post": post,
             "search": search
         }
 
@@ -72,6 +68,7 @@ def getAuthor(request, name):
 
     authorData.views = total_views
     authorData.likes = total_likes
+    authorData.articles = post.count()
     authorData.save()
 
     context = {
@@ -107,22 +104,6 @@ def getSingle(request, id):
     post.views += 1
     post.save()
 
-    # Count visitor old code
-    '''
-    hit_count = get_hitcount_model().objects.get_for_object(post)
-    hits = hit_count.hits
-    hitcontext = context['hitcount'] = {'id': hit_count.id}
-    hit_count_response = HitCountMixin.hit_count(request, hit_count)
-
-    if hit_count_response.hit_counted:
-        hits = hits + 1
-        post.views = hits
-        post.save()
-
-        hitcontext['hit_counted'] = hit_count_response.hit_counted
-        hitcontext['hit_message'] = hit_count_response.hit_message
-        hitcontext['total_hits'] = hits
-    '''
 
     context = {
         "post":post,
@@ -133,8 +114,8 @@ def getSingle(request, id):
     return render(request, "single.html", context)
 
 
-def getCategory(request, name):
-    cat = get_object_or_404(category, name = name)
+def getCategory(request, slug):
+    cat = get_object_or_404(category, slug = slug)
     post = article.objects.filter(category = cat.id).order_by('-posted_on')
 
     return render(request, "category.html", {
@@ -268,37 +249,6 @@ def bookmark(request):
         "post": pagination(request, post, 15),
     })
 
-
-@login_required
-def getBalance(request):
-    return render(request, 'reward.html')
-
-
-@login_required
-def getWithdraw(request):
-    user = get_object_or_404(get_user_model(), id=request.user.id)
-    balance = user.balance
-
-    withdraw_req = Withdraw.objects.filter(user=user)
-
-    form = WithdrawForm(request.POST or None)
-
-    if form.is_valid():
-        isinstance = form.save(commit = False)
-        isinstance.user = request.user
-        password = request.POST.get('password')
-
-        if isinstance.withdraw_amount >= 100 and isinstance.withdraw_amount <= balance and check_password(password, user.password):
-            user.balance = balance - isinstance.withdraw_amount
-            user.save()
-            isinstance.save()
-            messages.success(request, 'পেমেন্টের জন্য আবেদন করা হয়েছে!')
-        else:
-            messages.error(request, 'আবেদন সম্পন্ন হয়নি!')
-
-        return redirect(reverse('withdraw'))
-
-    return render(request, "withdraw.html", {"form" : form, 'req': withdraw_req})
 
 
 def leaderboard(request):

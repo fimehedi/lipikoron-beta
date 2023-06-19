@@ -8,7 +8,8 @@ from django.contrib import messages
 from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordResetConfirmView
 
 
-from .forms import CustomUserCreationForm, SettingsForm
+from .forms import CustomUserCreationForm, SettingsForm, WithdrawForm
+from .models import Withdraw, Notification
 
 
 @csrf_protect
@@ -121,3 +122,55 @@ class UserPasswordResetView(PasswordResetView):
 
 class UserPasswordResetConfirmView(PasswordResetConfirmView):
     template_name = 'password-reset-confirm.html'
+
+
+
+
+@login_required
+def getBalance(request):
+    return render(request, 'reward.html')
+
+
+@login_required
+def getWithdraw(request):
+    user = get_object_or_404(get_user_model(), id=request.user.id)
+    balance = user.balance
+
+    withdraw_req = Withdraw.objects.filter(user=user)
+
+    form = WithdrawForm(request.POST or None)
+
+    if form.is_valid():
+        isinstance = form.save(commit = False)
+        isinstance.user = request.user
+        password = request.POST.get('password')
+
+        if isinstance.withdraw_amount >= 100 and isinstance.withdraw_amount <= balance and check_password(password, user.password):
+            user.balance = balance - isinstance.withdraw_amount
+            user.save()
+            isinstance.save()
+            messages.success(request, 'পেমেন্টের জন্য আবেদন করা হয়েছে!')
+        else:
+            messages.error(request, 'আবেদন সম্পন্ন হয়নি!')
+
+        return redirect(reverse('withdraw'))
+
+    return render(request, "withdraw.html", {"form" : form, 'req': withdraw_req})
+
+
+
+@login_required
+def getNotification(request):
+    user = request.user
+    notifications = Notification.objects.filter(user=user).order_by('-date')
+    old_notifications = notifications.filter(is_seen=True)
+    new_notifications = notifications.filter(is_seen=False)
+
+    response = render(request, 'notification.html', context={
+        'old_notifications': old_notifications,
+        'new_notifications': new_notifications
+    })
+
+    new_notifications.update(is_seen=True)
+
+    return response

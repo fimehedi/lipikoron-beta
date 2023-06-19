@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-from .models import CustomUser
+from .models import CustomUser, Withdraw
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -35,3 +35,11 @@ class SettingsForm(forms.ModelForm):
         ]
 
 
+class WithdrawForm(forms.ModelForm):
+    class Meta:
+        model = Withdraw
+        fields = [
+            "withdraw_amount",
+            "withdraw_method",
+            "account_number"
+        ]

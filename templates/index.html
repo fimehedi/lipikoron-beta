@@ -16,7 +16,7 @@
         <button>ক্যাটাগরি <img class="icon" src="{% static 'icons/icon-outline/chevron-down.svg' %}"></button>
         <div class="dropdown-content">
             {% for category in category %}
-            <a href="{% url 'category' name=category.name %}">{{ category.name }}</a>
+            <a href="{% url 'category' slug=category.slug %}">{{ category.name }}</a>
             {% endfor %}
         </div>
     </div>

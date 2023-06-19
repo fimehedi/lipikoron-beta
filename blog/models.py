@@ -1,3 +1,4 @@
+from django.utils.timezone import datetime
 from django.db import models
 from django.contrib.auth import get_user_model
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -5,6 +6,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 class category(models.Model):
     name = models.CharField(max_length = 100)
+    slug = models.SlugField(unique=True, help_text="Must be Unique & English")
 
     class Meta:
         verbose_name_plural = "Categories"
@@ -20,7 +22,7 @@ class article(models.Model):
     )
     title       = models.CharField(max_length = 200)
     body        = RichTextUploadingField()
-    posted_on   = models.DateTimeField(auto_now = False, auto_now_add = True)
+    posted_on   = models.DateTimeField(default=datetime.now())
     updated_on  = models.DateTimeField(auto_now = True, auto_now_add = False)
     category    = models.ForeignKey(category, on_delete = models.CASCADE)
     thumbnail   = models.FileField()
@@ -38,6 +40,10 @@ class article(models.Model):
         choices=STATUS_CHOICES,
         default='published'
     )
+
+    def delete(self, *args, **kwargs):
+        self.thumbnail.delete()
+        super().delete(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -77,31 +83,3 @@ class Report(models.Model):
 
     def __str__(self):
         return self.report[:30]
-
-
-class Withdraw(models.Model):
-    user    = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    withdraw_amount = models.IntegerField()
-
-    METHOD_CHOICES = (
-        ('bkash', 'BKash'),
-        ('nagad', 'Nagad'),
-        ('rocket', 'Rocket')
-    )
-
-    withdraw_method = models.CharField(
-        max_length=10,
-        choices=METHOD_CHOICES,
-        default='bkash'
-    )
-    account_number = models.CharField(max_length=15)
-    date           = models.DateField(auto_now_add=True)
-    payment_done   = models.BooleanField(default=False)
-
-
-    def __str__(self):
-        if self.payment_done:
-            return f"Payment Done for {self.user.get_full_name()} ({self.withdraw_amount} TK)"
-
-        return f"Payment Request By {self.user.get_full_name()} ({self.withdraw_amount} TK)"
-

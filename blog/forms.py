@@ -1,5 +1,5 @@
 from django import forms
-from . models import article, comment, Report, Withdraw
+from . models import article, comment, Report
 
 class createForm(forms.ModelForm):
     class Meta:
@@ -28,11 +28,4 @@ class ReportForm(forms.ModelForm):
         ]
 
 
-class WithdrawForm(forms.ModelForm):
-    class Meta:
-        model = Withdraw
-        fields = [
-            "withdraw_amount",
-            "withdraw_method",
-            "account_number"
-        ]
+

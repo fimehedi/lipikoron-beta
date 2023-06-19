@@ -3,7 +3,7 @@
     <div class="archive-body">
         <img class="archive-thumbnail" src="{{ p.post.thumbnail.url }}" alt="Thumbnail" />
         <div class="archive-category-button">
-            <a href="{% url 'category' name=p.post.category.name %}" class="archive-category">{{ p.post.category.name }}</a>
+            <a href="{% url 'category' slug=p.post.category.slug %}" class="archive-category">{{ p.post.category.name }}</a>
         </div>
         <div class="archive-info">
             <a href="{% url 'single_post' id=p.post.id %}">
@@ -19,7 +19,7 @@
     </div>
     <ul class="archive-actions">
         <span class="badge-transparent">
-            <li><a href="{% url "category" name=p.post.category.name %}"><img class="icon"
+            <li><a href="{% url 'category' slug=p.post.category.slug %}"><img class="icon"
                         src="{% static 'icons/icon-outline/fire.svg' %}"> {{ p.post.category.name }}</a></li>
         </span>
         <li><a href="{% url 'author' name=p.post.author.username %}"><img class="icon" src="{% static 'icons/icon-outline/user.svg' %}">

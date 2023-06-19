@@ -11,7 +11,7 @@
         </div>
         <ul class="category-scroll">
             {% for category in category %}
-            <a href="{% url 'category' name=category.name %}">
+            <a href="{% url 'category' slug=category.slug %}">
                 <li>{{ category.name }}</li>
             </a>
             {% endfor %}

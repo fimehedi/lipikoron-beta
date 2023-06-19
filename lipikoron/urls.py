@@ -17,14 +17,19 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic.base import RedirectView
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 urlpatterns = [
     path('butterfly/', admin.site.urls),
     path('user/', include("users.urls")),
     path('', include("blog.urls")),
     path('', include("features.urls")),
-    path('', include("notifications.urls")),
     path('upload', include("ckeditor_uploader.urls")),
+    path(
+        "ads.txt",
+        RedirectView.as_view(url=staticfiles_storage.url("ads.txt")),
+    ),
 
 ]
 

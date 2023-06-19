@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from . models import *
+import random
 
 # Create your views here.
 def getPage(request, slug):
@@ -33,4 +34,5 @@ def comingSoon(request):
 
 def getActivity(request):
     quoteData = quote.objects.all()
-    return render(request, "activity.html", {'quote' : quoteData})
+    quotes = random.sample(list(quoteData), len(quoteData))
+    return render(request, "activity.html", {'quote' : quotes})

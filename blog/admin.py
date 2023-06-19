@@ -1,17 +1,7 @@
 from django.contrib import admin
-from . models import category, article, comment, Report, Withdraw, FeaturedPost
-
-# Register your models here.
-# class authorModel(admin.ModelAdmin):
-#     list_display = ["__str__"]
-#     list_per_page = 25
-#     search_fields = ["__str__"]
-#     class Meta:
-#         Model = author
-# admin.site.register(author, authorModel)
+from . models import category, article, comment, Report, FeaturedPost
 
 from import_export.admin import ImportExportModelAdmin
-
 
 
 class categoryModel(ImportExportModelAdmin):
@@ -61,11 +51,4 @@ class reportModel(ImportExportModelAdmin):
 admin.site.register(Report, reportModel)
 
 
-class withdrawModel(ImportExportModelAdmin):
-    list_display = ["__str__"]
-    list_per_page = 25
-    search_fields = ["__str__"]
-    list_filter = ['payment_done',]
-    class Meta:
-        Model = Withdraw
-admin.site.register(Withdraw, withdrawModel)
+

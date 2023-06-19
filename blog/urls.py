@@ -18,20 +18,18 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name = "index"),
-    path("lipikar/<name>", views.getAuthor, name = "author"),
-    path("lipi/<int:id>", views.getSingle, name = "single_post"),
+    path("lipikar/<name>/", views.getAuthor, name = "author"),
+    path("lipi/<int:id>/", views.getSingle, name = "single_post"),
     path("lipi/like", views.like, name="postlike"),
-    path("lipi/<int:post_id>/report", views.report, name="report"),
-    path("category/<name>", views.getCategory, name = "category"),
-    path("dashboard", views.getDashboard, name = "dashboard"),
-    path("create", views.getCreate, name = "create"),
-    path("update/<int:id>", views.getUpdate, name = "update"),
-    path("delete/<int:id>", views.getDelete, name = "delete"),
-    path("lipi/bookmark", views.bookmark, name="bookmark"),
-    path("search", views.getSearch, name="search"),
-    path("balance", views.getBalance, name="balance"),
-    path("withdraw", views.getWithdraw, name="withdraw"),
-    path("leaderboard", views.leaderboard, name="leaderboard"),
+    path("lipi/<int:post_id>/report/", views.report, name="report"),
+    path("category/<slug>/", views.getCategory, name = "category"),
+    path("dashboard/", views.getDashboard, name = "dashboard"),
+    path("create/", views.getCreate, name = "create"),
+    path("update/<int:id>/", views.getUpdate, name = "update"),
+    path("delete/<int:id>/", views.getDelete, name = "delete"),
+    path("lipi/bookmark/", views.bookmark, name="bookmark"),
+    path("search/", views.getSearch, name="search"),
+    path("leaderboard/", views.leaderboard, name="leaderboard"),
 
 
 ]
